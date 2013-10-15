@@ -54,4 +54,31 @@ class BitfieldTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('10010000', (string)$bfClone);
     }
+
+    public function testSetValue()
+    {
+        $bf = new Bitfield(array('a', 'b', 'c'));
+        $this->assertEmpty($bf->getOptionsOn());
+
+        $bf->setValue(0);
+        $this->assertEmpty($bf->getOptionsOn());
+
+        $bf->setValue(1);
+        $this->assertEquals(array('a'), $bf->getOptionsOn());
+
+        $bf->setValue(2);
+        $this->assertEquals(array('b'), $bf->getOptionsOn());
+
+        $bf->setValue(3);
+        $this->assertEquals(array('a', 'b'), $bf->getOptionsOn());
+
+        $bf->setValue(4);
+        $this->assertEquals(array('c'), $bf->getOptionsOn());
+
+        $bf->setValue(5);
+        $this->assertEquals(array('a', 'c'), $bf->getOptionsOn());
+
+        $bf->setValue(7);
+        $this->assertEquals(array('a', 'b', 'c'), $bf->getOptionsOn());
+    }
 }
